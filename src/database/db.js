@@ -4,6 +4,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 // Importar modelos desde la carpeta models
 const UserModel = require('./models/users');
 const TenantModel = require('./models/tenants');
+const { options } = require('../routes/users.routes');
 
 let sslopt = {};
 if (process.env.NODE_ENV !== "development") {
@@ -30,8 +31,14 @@ const sequelize = new Sequelize(
       acquire: 30000,
       idle: 10000
     },
-    logging: false
-  }
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      }
+    }
+  },
 );
 
 // Autenticar conexión con la base de datos
