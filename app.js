@@ -20,6 +20,10 @@ var corsOptions = {
 app.use(express.static(path.join(__dirname, 'src', 'controllers', 'frontend')));
 app.use(cors(corsOptions));
 
+app.get('/test', (req, res) => {
+  res.send("Hello world bitch!")
+})
+
 // RUTAS DE CONTACTOS
 app.use('/contactos', ContactsRoutes);
 // RUTA DE USUARIOS
